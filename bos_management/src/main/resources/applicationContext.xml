@@ -4,13 +4,13 @@
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/context/spring-context-4.2.xsd
 	http://www.springframework.org/schema/aop
-	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 	http://www.springframework.org/schema/tx 
-	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 	http://www.springframework.org/schema/data/jpa
 	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 	
@@ -22,7 +22,7 @@
 		<property name="user" value="${jdbc.user}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-<jpa:repositories base-package="cn.itcast.bos.dao" /> 
+
 	
 	<context:component-scan base-package="cn.itcast.bos.service,cn.itcast.bos.web" />
 	
@@ -57,9 +57,10 @@
 			</map>
 		</property>
 	</bean>
+	<jpa:repositories base-package="cn.itcast.bos.dao" /> 
 	
-	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
