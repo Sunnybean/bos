@@ -26,7 +26,7 @@ import cn.itcast.bos.service.base.StandardService;
 @Scope("prototype")
 @Controller
 @Namespace("/")
-@ParentPackage("json-default")
+@ParentPackage("struts-default")
 public class StandardAction extends ActionSupport implements ModelDriven<Standard> {
 
 	/**
@@ -62,7 +62,7 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 		System.out.println("添加收派标准");
 		return SUCCESS;
 	}
-
+/*
 	// 分页查询
 	@Action(value = "standard_pageQuery", results = { @Result(name = "success", type = "json") })
 	public String pageQuery() {
@@ -80,5 +80,5 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 		ActionContext.getContext().getValueStack().push(standards);
 		return SUCCESS;
 	}
-
+*/
 }

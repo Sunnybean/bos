@@ -17,7 +17,7 @@ import cn.itcast.bos.service.base.CourierService;
 @Actions
 @Controller
 @Scope("prototype")
-@ParentPackage("json-default")
+@ParentPackage("struts-default")
 @Namespace("/")
 public class CourierAction extends ActionSupport implements ModelDriven<Courier> {
 
