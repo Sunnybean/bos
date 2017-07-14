@@ -6,5 +6,4 @@ import cn.itcast.bos.domain.base.Courier;
 
 public interface CourierRepository extends JpaRepository<Courier, Integer>{
 
-
 }

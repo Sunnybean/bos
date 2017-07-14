@@ -10,7 +10,9 @@ import cn.itcast.bos.domain.base.Standard;
 
 
 public interface StandardRepository extends JpaRepository<Standard, Integer> {
-	public List<Standard> findByName(String name);
+	
+	
+	/*public List<Standard> findByName(String name);
 	public List<Standard> findByNameLike(String name);
 	
 	@Query(value="from Standard where name= ?" ,nativeQuery=false)
@@ -19,5 +21,5 @@ public interface StandardRepository extends JpaRepository<Standard, Integer> {
 	@Query("update Standard set minLength=?2 where id=?1")
 	@Modifying
 	public void updateMinLength(Integer id,Integer minLength);
-
+*/
 }
