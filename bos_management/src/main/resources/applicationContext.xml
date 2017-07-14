@@ -13,20 +13,19 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd
 	http://www.springframework.org/schema/data/jpa
 	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+	
+	<context:property-placeholder location="classpath:config.properties"/>
 	<!-- 连接池 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.80.10:1521:orcl" />
-		<property name="user" value="bos" />
-		<property name="password" value="1" />
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
-
-	<jpa:repositories base-package="cn.itcast.bos.dao" />
+<jpa:repositories base-package="cn.itcast.bos.dao" /> 
+	
 	<context:component-scan base-package="cn.itcast.bos.service,cn.itcast.bos.web" />
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -57,5 +56,10 @@
 				<entry key="hibernate.cache.use_query_cache" value="false" />
 			</map>
 		</property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 </beans>
