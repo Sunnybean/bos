@@ -1,6 +1,8 @@
 package cn.itcast.bos.service.base.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,12 @@ public class CourierServiceImpl implements CourierService {
 	public void save(Courier courier) {
 		
 		courierRepository.save(courier);
+	}
+
+	@Override
+	public Page<Courier> findPageData(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return courierRepository.findAll(pageable);
 	}
 
 }

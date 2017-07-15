@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ import cn.itcast.bos.service.base.StandardService;
 @Scope("prototype")
 @Controller
 @Namespace("/")
-@ParentPackage("struts-default")
+@ParentPackage("json-default")
 public class StandardAction extends ActionSupport implements ModelDriven<Standard> {
 
 	/**
@@ -62,12 +63,15 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 		System.out.println("添加收派标准");
 		return SUCCESS;
 	}
-/*
+
 	// 分页查询
 	@Action(value = "standard_pageQuery", results = { @Result(name = "success", type = "json") })
 	public String pageQuery() {
 		Pageable pageable = new PageRequest(page - 1, rows);
+		Page<Standard> pageData = standardService.findPageData(pageable);
 		Map<String, Object> result = new HashMap<>();
+		result.put("total",pageData.getNumberOfElements());
+		result.put("row", pageData.getContent());
 
 		ActionContext.getContext().getValueStack().push(result);
 		return SUCCESS;
@@ -80,5 +84,5 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 		ActionContext.getContext().getValueStack().push(standards);
 		return SUCCESS;
 	}
-*/
+
 }

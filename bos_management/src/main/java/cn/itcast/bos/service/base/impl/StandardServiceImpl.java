@@ -27,7 +27,7 @@ public class StandardServiceImpl implements StandardService {
 	@Override
 	public Page<Standard> findPageData(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return null;
+		return standardRepository.findAll(pageable);
 	}
 
 	@Override
