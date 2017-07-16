@@ -33,7 +33,7 @@ public class StandardServiceImpl implements StandardService {
 	@Override
 	public List<Standard> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return standardRepository.findAll();
 	}
 
 	

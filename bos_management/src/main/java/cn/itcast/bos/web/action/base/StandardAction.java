@@ -57,7 +57,7 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 
 	// 添加
 	@Action(value = "standard_save", results = {
-			@Result(name = "success", type = "redirect", location = "/page/base/standard.html") })
+			@Result(name = "success", type = "redirect", location = "./pages/base/standard.html") })
 	public String save() {
 		standardService.save(standard);
 		System.out.println("添加收派标准");
@@ -69,10 +69,10 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 	public String pageQuery() {
 		Pageable pageable = new PageRequest(page - 1, rows);
 		Page<Standard> pageData = standardService.findPageData(pageable);
+		
 		Map<String, Object> result = new HashMap<>();
-		result.put("total",pageData.getNumberOfElements());
-		result.put("row", pageData.getContent());
-
+		result.put("total", pageData.getTotalElements());
+		result.put("rows", pageData.getContent());
 		ActionContext.getContext().getValueStack().push(result);
 		return SUCCESS;
 	}
