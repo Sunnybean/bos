@@ -22,16 +22,5 @@ public interface StandardService {
 
 	// 查询所有收派标准
 	public List<Standard> findAll();
-=======
- * 收派标准管理 
- * @author itcast
- * 
- */
-public interface StandardService {
-	public void save(Standard standard);
-
-	// 分页查询 
-	public Page<Standard> findPageData(Pageable pageable);
->>>>>>> refs/remotes/origin/master
 
 }

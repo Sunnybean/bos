@@ -91,6 +91,14 @@ public class Courier {
 		this.telephone = telephone;
 	}
 
+	public String getPda() {
+		return pda;
+	}
+
+	public void setPda(String pda) {
+		this.pda = pda;
+	}
+
 	public Character getDeltag() {
 		return deltag;
 	}
@@ -139,4 +147,30 @@ public class Courier {
 		this.vehicleNum = vehicleNum;
 	}
 
+	public Standard getStandard() {
+		return standard;
+	}
+
+	public void setStandard(Standard standard) {
+		this.standard = standard;
+	}
+
+	public TakeTime getTakeTime() {
+		return takeTime;
+	}
+
+	public void setTakeTime(TakeTime takeTime) {
+		this.takeTime = takeTime;
+	}
+
 	@JSON(serialize = false)
+	public Set<FixedArea> getFixedAreas() {
+		return fixedAreas;
+	}
+
+	public void setFixedAreas(Set<FixedArea> fixedAreas) {
+		this.fixedAreas = fixedAreas;
+	}
+	
+
+}	
