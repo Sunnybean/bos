@@ -57,7 +57,7 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 
 	// 添加
 	@Action(value = "standard_save", results = {
-			@Result(name = "success", type = "redirect", location = "./pages/base/standard.html") })
+			@Result(name = "success", location = "./pages/base/standard.html") })
 	public String save() {
 		standardService.save(standard);
 		System.out.println("添加收派标准");
