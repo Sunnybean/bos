@@ -12,6 +12,7 @@ import cn.itcast.bos.dao.base.StandardRepository;
 import cn.itcast.bos.domain.base.Standard;
 import cn.itcast.bos.service.base.StandardService;
 
+<<<<<<< HEAD
 @Service
 @Transactional
 public class StandardServiceImpl implements StandardService {
@@ -37,5 +38,25 @@ public class StandardServiceImpl implements StandardService {
 	}
 
 	
+=======
+@Service 
+@Transactional
+public class StandardServiceImpl implements StandardService {
+
+	// 注入DAO
+	@Autowired
+	private StandardRepository standardRepository;
+	
+	@Override
+	public void save(Standard standard) {
+		standardRepository.save(standard);
+	}
+
+	@Override
+	public Page<Standard> findPageData(Pageable pageable) {
+		return standardRepository.findAll(pageable);
+	}
+
+>>>>>>> refs/remotes/origin/master
 
 }
