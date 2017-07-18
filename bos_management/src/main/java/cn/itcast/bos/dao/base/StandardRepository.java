@@ -17,8 +17,6 @@ public interface StandardRepository extends JpaRepository<Standard, Integer> {
 	// nativeQuery 为 false 配置JPQL 、 为true 配置SQL 
 	public List<Standard> queryName(String name);
 	
-	@Query
-	public List<Standard> queryName2(String name);
 	
 	@Query(value="update Standard set minLength=?2 where id =?1")
 	@Modifying

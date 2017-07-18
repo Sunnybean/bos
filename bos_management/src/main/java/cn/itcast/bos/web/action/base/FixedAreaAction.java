@@ -54,7 +54,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 					Predicate p1 = cb.equal(root.get("id").as(String.class), model.getId());
 					list.add(p1);
 				}
-				/*if (StringUtils.isNotBlank(model.getCompany())) {
+				/*if (StringUtils.isNotBlank(model.get)) {
 					Predicate p2 = cb.like(root.get("company").as(String.class), "%" + model.getCompany() + "%");
 					list.add(p2);
 				}*/
