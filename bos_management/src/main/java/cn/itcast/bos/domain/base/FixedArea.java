@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 import org.apache.struts2.json.annotations.JSON;
 
 /**
@@ -110,4 +109,30 @@ public class FixedArea {
 	public void setSubareas(Set<SubArea> subareas) {
 		this.subareas = subareas;
 	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getOperatingCompany() {
+		return operatingCompany;
+	}
+
+	public void setOperatingCompany(String operatingCompany) {
+		this.operatingCompany = operatingCompany;
+	}
+
+	@JSON(serialize = false)
+	public Set<Courier> getCouriers() {
+		return couriers;
+	}
+
+	public void setCouriers(Set<Courier> couriers) {
+		this.couriers = couriers;
+	}
+
 }

@@ -33,7 +33,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	@Autowired
 	private FixedAreaService fixedService;
 
-	@Action(value = "fixexArea_save", results = {
+	@Action(value = "fixedArea_save", results = {
 			@Result(name = "success", type = "redirect", location = "./pages/base/fixed_area.html") })
 	public String save() {
 		fixedService.save(model);
@@ -54,10 +54,10 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 					Predicate p1 = cb.equal(root.get("id").as(String.class), model.getId());
 					list.add(p1);
 				}
-				/*if (StringUtils.isNotBlank(model.get)) {
+				if (StringUtils.isNotBlank(model.getCompany())) {
 					Predicate p2 = cb.like(root.get("company").as(String.class), "%" + model.getCompany() + "%");
 					list.add(p2);
-				}*/
+				}
 				return cb.and(list.toArray(new Predicate[0]));
 			}
 		};
