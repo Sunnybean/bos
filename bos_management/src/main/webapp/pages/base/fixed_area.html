@@ -37,6 +37,18 @@
 				if(rows ===1){
 					$("#customerWindow").window('open');
 					$("#customerFixedAreaId").val(rows[0].id);
+					$.post("../../fixedArea_findNoAssociationCustomers.action",function(data){
+						$(data).each(function(){
+							var option = $("<option value='"+this.id+"'>"+this.username+"("+this.address+")</option>");
+							$("#associationSelect").append(option);
+						});
+					});
+					$.post("../../fixedArea_findHasAssociationFixedAreaCustomers.action",{"id":rows[0].id},function(data){
+						   $(data).each(function(){
+						   		var option =$("<option value='"+this.id+"'>"+this.username+"("+this.addrsess+")</option>");
+						   		$("#associationSelect").append(option);
+						   });
+					});
 				}else{
 					$.messager("警告","定区关联客户只能选择一行","warning");
 				}
@@ -133,7 +145,7 @@
 					border : true,
 					rownumbers : true,
 					striped : true,
-					pageList: [30,50,100],
+					pageList: [20,30,40],
 					pagination : true,
 					toolbar : toolbar,
 					url : "../../fixedArea_pageQuery.action",
@@ -176,8 +188,17 @@
 					 	$.messager.alert("警告","表单不合法","warning");
 					 }
 				});
-				
-				
+				$("#toRight").click(function(){
+					$("#associationSelect").append($("#noassociationSelect option:selected"));
+				});
+				$("toLeft").click(function(){
+					$("#noassociationSelect").append($("#associationSelect option:selected"));
+				});
+				$("#associationBtn").click(function(){
+					$("#associationSelect option").attr("selected","selected");
+					$("#customerForm").submit();
+					
+				});
 				
 				
 			});
@@ -433,9 +454,9 @@
 		</div>
 
 		<!-- 关联客户窗口 -->
-		<div class="easyui-window" title="关联客户窗口" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 600px;height: 300px;">
+		<div class="easyui-window" title="关联客户窗口" id="customerWindow" modal="true" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 600px;height: 300px;">
 			<div style="overflow:auto;padding:5px;" border="false">
-				<form id="customerForm" action="../../decidedzone_assigncustomerstodecidedzone.action" method="post">
+				<form id="customerForm" action="../../fixedArea_associatonCustomerToFixedArea.action" method="post">
 					<table class="table-edit" width="80%" align="center">
 						<tr class="title">
 							<td colspan="3">关联客户</td>
