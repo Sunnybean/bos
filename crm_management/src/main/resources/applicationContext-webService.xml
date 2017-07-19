@@ -18,6 +18,10 @@
 		<jaxrs:serviceBeans>
 			<bean class="cn.itcast.crm.service.impl.CustomerServiceImpl"></bean>
 		</jaxrs:serviceBeans>
+		<jaxrs:inInterceptors>
+		<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
+		</jaxrs:inInterceptors>
+	
 	</jaxrs:server>
 
 </beans>

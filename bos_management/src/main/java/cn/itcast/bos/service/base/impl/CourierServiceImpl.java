@@ -1,5 +1,13 @@
 package cn.itcast.bos.service.base.impl;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,11 +47,21 @@ public class CourierServiceImpl implements CourierService {
 			courierRepository.updateDelTag(id);
 		}
 	}
-	
-	/*@Override
-	public Page<Courier> findPageData(Specification<T> , Pageable pageable) {
-		// TODO Auto-generated method stub
-		return courierRepository.findAll(pageable);
-	}*/
 
+
+	@Override
+	public List<Courier> findNoAssociation() {
+		// TODO Auto-generated method stub
+		Specification<Courier> specification = new Specification<Courier>() {
+			
+			@Override
+			public Predicate toPredicate(Root<Courier> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				// TODO Auto-generated method stub
+				Predicate p1 = cb.isEmpty(root.get("fixedAreas").as(Set.class));
+				return p1;
+			}
+		};
+		return courierRepository.findAll(specification);
+	}
+	
 }

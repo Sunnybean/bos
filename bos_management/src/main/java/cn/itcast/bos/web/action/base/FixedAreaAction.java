@@ -31,6 +31,7 @@ import cn.itcast.bos.service.base.FixedAreaService;
 import cn.itcast.bos.web.action.common.BaseAction;
 import cn.itcast.crm.domain.Customer;
 
+
 @Controller
 @Scope("prototype")
 @ParentPackage("json-default")
@@ -85,7 +86,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	@Action(value = "fixedArea_findNoAssociationCustomers", results = { @Result(name = "success", type = "json") })
 	public String findNoAssociationCustomers() {
 		Collection<? extends Customer> collection = WebClient
-				.create("http://localhost:8888/crm_management/services/customerService/noassociationfixedareacustomers")
+				.create("http://localhost:8888/crm_management/services/customerService/noassociationcustomers")
 				.accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		ActionContext.getContext().getValueStack().push(collection);
 		return SUCCESS;
@@ -114,6 +115,23 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		return SUCCESS;
 	}
 	
-	
+	private Integer courierId;
+	private Integer takeTimeId;
+
+	public void setCourierId(Integer courierId) {
+		this.courierId = courierId;
+	}
+
+	public void setTakeTimeId(Integer takeTimeId) {
+		this.takeTimeId = takeTimeId;
+	}
+	@Action(value="fixedArea_associationCourierToFixedArea", results={@Result(name="success",type="redirect"
+			,location="./pages/base/fixed_area.html")})
+	public String associationCourierToFixedArea(){
+		
+		fixedService.associationCourierToFixedArea(model,courierId,takeTimeId);
+		
+		return SUCCESS;
+	}
 
 }

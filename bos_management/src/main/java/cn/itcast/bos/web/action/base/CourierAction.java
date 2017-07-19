@@ -130,8 +130,14 @@ public class CourierAction extends ActionSupport implements ModelDriven<Courier>
 		courierService.delBatch(idArray);
 		return SUCCESS;
 	}
-	
-	
+//	定区关联快递员的方法
+	@Action(value="courier_findnoassociation",results={@Result(name="success",type="json")})
+	public String courierFindnoassociation(){
+       List<Courier> list =	 courierService.findNoAssociation();
+		ActionContext.getContext().getValueStack().push(list);
+		
+		return SUCCESS;
+	}
 	
 	
 	

@@ -2,6 +2,7 @@ package cn.itcast.crm.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +32,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void associationCustomerToFixedArea(String customerIdstr, String fixedAreaId) {
+	public void associationCustomerToFixedArea(String customerIdStr, String fixedAreaId) {
 		// TODO Auto-generated method stub
-		String[] array = customerIdstr.split(",");
+		customerRepository.clearFixedAreaId(fixedAreaId);
+		if (StringUtils.isBlank(customerIdStr)) {
+			return;
+		}
+		String[] array = customerIdStr.split(",");
 		for (String idStr : array) {
 			Integer id = Integer.parseInt(idStr);
 			customerRepository.updateFixedAreaId(fixedAreaId,id);

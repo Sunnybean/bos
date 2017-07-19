@@ -15,19 +15,19 @@ public interface CustomerService {
 	// 查询所有未关联客户列表
 	@Path("/noassociationcustomers")
 	@GET
-	@Produces({"application/xml","applicaton/json"})
+	@Produces({"application/xml","application/json"})
 	public List<Customer> findNoAssociationCustomers();
 
 	// 查询已经关联的客户列表
 	@Path("/associationfixedareacustomers/{fiexdareaid}")
 	@GET  //查询
-	@Produces({"application/xml","applicaton/json"})
-	public List<Customer> findHasAssociationFixedAreaCustomer(@PathParam("fixedareaid") String fixedAreaId);
+	@Produces({"application/xml","application/json"})
+	public List<Customer> findHasAssociationFixedAreaCustomer(@PathParam("fiexdareaid") String fixedAreaId);
 
 	// 将客户关联到定区上
-	@Path("/associationcustomertofixedarea/")
+	@Path("/associationcustomerstofixedarea/")
 	@PUT //修改
 	public void associationCustomerToFixedArea(
-			@QueryParam("customerIdstr")  String customerIdstr, 
+			@QueryParam("customerIdStr")  String customerIdStr, 
 			@QueryParam("fixedAreaId")  String fixedAreaId);
 }
