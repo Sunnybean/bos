@@ -31,12 +31,16 @@ import cn.itcast.bos.service.base.FixedAreaService;
 import cn.itcast.bos.web.action.common.BaseAction;
 import cn.itcast.crm.domain.Customer;
 
-
 @Controller
 @Scope("prototype")
 @ParentPackage("json-default")
 @Namespace("/")
 public class FixedAreaAction extends BaseAction<FixedArea> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3434370911608802223L;
+
 	@Autowired
 	private FixedAreaService fixedService;
 
@@ -60,7 +64,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 
 		Pageable pageable = new PageRequest(page - 1, rows);
 
-		Specification sepcification = new Specification<FixedArea>() {
+		Specification<FixedArea> sepcification = new Specification<FixedArea>() {
 
 			@Override
 			public Predicate toPredicate(Root<FixedArea> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -103,18 +107,19 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		ActionContext.getContext().getValueStack().push(collection);
 		return SUCCESS;
 	}
+
 	// 关联客户到定区
-	@Action(value="fixedArea_associatonCustomerToFixedArea", results={@Result(name="success",type="redirect"
-			,location="./pages/base/fixed_area.html")})
-	public String associationCustomerToFixedArea(){
-		String customerIdStr = StringUtils.join(customerIds,",");
+	@Action(value = "fixedArea_associatonCustomerToFixedArea", results = {
+			@Result(name = "success", type = "redirect", location = "./pages/base/fixed_area.html") })
+	public String associationCustomerToFixedArea() {
+		String customerIdStr = StringUtils.join(customerIds, ",");
 		WebClient.create("http://localhost:8888/crm_management/services/customerService"
-		+"/associationcustomerstofixedarea?customerIdStr="
-				+ customerIdStr +"&fixedAreaId"+model.getId()).put(null);
-		
+				+ "/associationcustomerstofixedarea?customerIdStr=" + customerIdStr + "&fixedAreaId=" + model.getId())
+				.put(null);
+
 		return SUCCESS;
 	}
-	
+
 	private Integer courierId;
 	private Integer takeTimeId;
 
@@ -125,12 +130,14 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	public void setTakeTimeId(Integer takeTimeId) {
 		this.takeTimeId = takeTimeId;
 	}
-	@Action(value="fixedArea_associationCourierToFixedArea", results={@Result(name="success",type="redirect"
-			,location="./pages/base/fixed_area.html")})
-	public String associationCourierToFixedArea(){
-		
-		fixedService.associationCourierToFixedArea(model,courierId,takeTimeId);
-		
+
+	// 关联快递员到定区
+	@Action(value = "fixedArea_associationCourierToFixedArea", results = {
+			@Result(name = "success", type = "redirect", location = "./pages/base/fixed_area.html") })
+	public String associationCourierToFixedArea() {
+
+		fixedService.associationCourierToFixedArea(model, courierId, takeTimeId);
+
 		return SUCCESS;
 	}
 

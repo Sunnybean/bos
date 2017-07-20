@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * @description:分区
  */
@@ -90,7 +92,7 @@ public class SubArea {
 	public void setArea(Area area) {
 		this.area = area;
 	}
-
+	@JSON(serialize = false)
 	public FixedArea getFixedArea() {
 		return fixedArea;
 	}
