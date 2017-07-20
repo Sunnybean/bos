@@ -34,6 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void associationCustomerToFixedArea(String customerIdStr, String fixedAreaId) {
 		// TODO Auto-generated method stub
+		
 		customerRepository.clearFixedAreaId(fixedAreaId);
 		if (StringUtils.isBlank(customerIdStr)) {
 			return;
