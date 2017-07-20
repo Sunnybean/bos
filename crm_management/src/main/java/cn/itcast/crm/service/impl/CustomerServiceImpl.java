@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		
 		customerRepository.clearFixedAreaId(fixedAreaId);
-		if (StringUtils.isBlank(customerIdStr)) {
+		if (StringUtils.isBlank(customerIdStr)|| "null".equals(fixedAreaId)) {
 			return;
 		}
 		String[] array = customerIdStr.split(",");
