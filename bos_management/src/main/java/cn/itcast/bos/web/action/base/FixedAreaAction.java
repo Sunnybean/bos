@@ -103,6 +103,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		Collection<? extends Customer> collection = WebClient
 				.create("http://localhost:8888/crm_management/services/customerService/associationfixedareacustomers/"
 						+ model.getId())
+				//accept 接收数据类型    type 返回数据类型
 				.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		ActionContext.getContext().getValueStack().push(collection);
 		return SUCCESS;
