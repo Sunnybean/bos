@@ -1,4 +1,4 @@
-package cn.itcast.bos.web.action;
+/*package cn.itcast.bos.web.action;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -32,9 +32,9 @@ import cn.itcast.crm.domain.Customer;
 @Controller
 @Scope("prototype")
 public class CustomerAction extends BaseAction<Customer> {
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	@Qualifier("jmsQueueTemplate")
@@ -59,13 +59,13 @@ public class CustomerAction extends BaseAction<Customer> {
 		
 		//调用SMS发送短信
 		//String result = SmsUtils.sendSmsByHTTP(model.getTelephone(), msg);
-	/*	String result ="000//xxxx";
+		String result ="000//xxxx";
 		if (result.startsWith("000")) {
 			System.out.println("发送成功");
 			return NONE;
 		}else{
 			throw new RuntimeException("短信发送失败，信息码"+result);
-		}	*/
+		}	
 		// 调用MQ服务，发送一条消息
 		jmsTemplate.send("bos_sms", new MessageCreator() {
 			@Override
@@ -88,8 +88,10 @@ public class CustomerAction extends BaseAction<Customer> {
 		this.checkcode = checkcode;
 	}
 
-	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	
+	
+	 @Autowired
+	 private RedisTemplate<String, String> redisTemplate;
 	// 注册用户的方法
 	@Action(value = "customer_regist", results = {
 			@Result(name = "success", type = "redirect", location = "signup-success.html"),
@@ -101,11 +103,11 @@ public class CustomerAction extends BaseAction<Customer> {
 		// 从session获取 之前生成验证码
 		String checkcodeSession = (String) ServletActionContext.getRequest().getSession()
 				.getAttribute(model.getTelephone());
-	/*	if (checkcodeSession == null || !checkcode.equals(checkcodeSession)) {
+		if (checkcodeSession == null || !checkcode.equals(checkcodeSession)) {
 			System.out.println("短信验证码错误...");
 			// 短信验证码错误
 			return INPUT;
-		}*/
+		}
 		// 调用webService 连接CRM 保存客户信息
 		WebClient.create("http://localhost:8888/crm_management/services" + "/customerService/customer")
 				.type(MediaType.APPLICATION_JSON).post(model);
@@ -167,3 +169,4 @@ public class CustomerAction extends BaseAction<Customer> {
 	}
 
 }
+*/
