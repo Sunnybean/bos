@@ -95,13 +95,13 @@
 							<div class=" form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>手机号</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" ng-model="telephone" id="inputaccount" placeholder="请输入手机号">
+									<input type="text" name="telephone" class="form-control" ng-model="telephone" id="inputaccount" placeholder="请输入手机号">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>验证码</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="inputaccount" placeholder="请输入验证码">
+									<input type="text" name="checkcode" class="form-control" id="inputaccount" placeholder="请输入验证码">
 								</div>
 
 								<!--//添加点击事件，获取消息和触发函数-->
@@ -113,7 +113,7 @@
 							<div class="form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>密码</label>
 								<div class="col-sm-8">
-									<input type="password" class="form-control" id="inputaccount" placeholder="6-16位数字或英文字母">
+									<input type="password" name="password" class="form-control" id="inputaccount" placeholder="6-16位数字或英文字母">
 									<p class="text-right grey">安全强度：*****</p>
 								</div>
 
@@ -128,7 +128,7 @@
 							<div class="form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>绑定邮箱</label>
 								<div class="col-sm-8">
-									<input type="email" class="form-control" id="inputemail" placeholder="请输入需要绑定的邮箱">
+									<input type="email" name="email" class="form-control" id="inputemail" placeholder="请输入需要绑定的邮箱">
 								</div>
 							</div>
 							<div class="form-group">
@@ -138,7 +138,6 @@
 								      <input type="checkbox"> 查看并同意<a href="#"> 《速运快递服务协议》</a>
 								    </label>
 									</div>
-
 								</div>
 							</div>
 							<div class="form-group signbtn">
