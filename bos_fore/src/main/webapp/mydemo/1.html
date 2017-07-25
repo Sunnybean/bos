@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../js/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//初始化模块
+			var myapp = angular.module("myapp", []);
+			//定义模块的控制器
+			//依赖注入  $scope对象 ,操作当前作用域视图
+			myapp.controller("mycrtl", ["$scope", function($scope) {
+				$scope.name2 = "黑马程序员";
+				$scope.clearVal = function() {
+					$scope.name2 = "";
+				};
+				$scope.products=[{
+					id:1001,
+					name:'相机',
+					price:300
+				},{
+					id:1002,
+					name:'哈哈',
+					price:455
+				}];
+			}]);
+		</script>
+	</head>
+
+	<body>
+		<!--第一个练习
+			<div id="">
+			<input type="text" id="" name="name" ng-model="name2"/>
+		</div>
+		
+		<div id="">
+			你好，{{name2}}
+		</div>
+		-->
+		<!--定义了一个模块-->
+		<div ng-app="myapp" ng-controller="mycrtl">
+			<div>
+				<input type="text" name="name2" ng-model="name2" />
+				<input type="button" value="清空" ng-click="clearVal()" />
+			</div>
+			<div>
+				你好，{{name2}}
+			</div>
+			<table border="1" width="100%">
+				<tr>
+					<td>序号</td>
+					<td>商品编号</td>
+					<td>商品名称</td>
+					<td>价格</td>
+				</tr>
+				<tr ng-repeat="product in products">
+					<td>{{$index+1}}</td>
+					<td>{{product.id}}</td>
+					<td>{{product.name}}</td>
+					<td>{{product.price}}</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</body>
+
+</html>

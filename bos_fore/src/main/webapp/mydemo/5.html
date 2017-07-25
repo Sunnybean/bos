@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义app模块
+			var myapp = angular.module("myapp", ["ngRoute"]);
+
+			//配置模块的路由
+			myapp.config(["$routeProvider", function($routeProvider) {
+				$routeProvider.when("/java", {
+					templatetUrl: '5_1.html'
+				}).when("/user", {
+					templateUrl: '5_2.html'
+				}).when("/product", {
+					templateUrl: '5_3.html'
+				}).otherwise({
+					redirectTo: '/'
+				});
+			}]);
+		</script>
+	</head>
+<!--路由器的写法
+	$routeProvider.when("/java",{templateUrl:'5_1.html'})
+				  .when("/user",{templateUrl:'5_2.html'})
+				  .when("/product",{templateUrl:5_3.html})
+				  .otherwise("/hha",templateUrl:'/');
+-->
+	<body ng-app="myapp">
+		<!--头-->
+		<div id="">
+			<h1>HEAD</h1>
+			<ul>
+
+				<a href="#/java">首页</a>
+
+				<a href="#/user">用户管理</a>
+
+				<a href="#/product">商品管理</a>
+
+			</ul>
+		</div>
+		<!--中心-->
+		<div ng-view>
+
+		</div>
+		<!--尾巴-->
+		<div id="">
+			<h1>root</h1>
+		</div>
+
+	</body>
+
+</html>

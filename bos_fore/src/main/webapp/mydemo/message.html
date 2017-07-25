@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>我的速运-注册</title>
+		<link rel="stylesheet" type="text/css" href="../css/styleindex.css">
+		<link rel="stylesheet" type="text/css" href="../css/public.css">
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../css/nav.css">
+
+		<script src="../js/jquery.min.js" type="text/javascript"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="../js/self/effect.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+		<script type="text/javascript" src="../js/angular-route.min.js"></script>
+		<script type="text/javascript">
+			//定义模块
+			var myapp = angular.module("signupApp", []);
+			myapp.controller("signupCrtl", ["$scope","$http", function($scope,$http) {
+				$scope.btnMsg = "发送验证码";
+				var active = true;
+				var time = 10;//倒计时60秒
+				var timeInterval;
+
+				$scope.getCheckCode = function(telephone) {
+					if(active == false) {
+						return;
+					}
+					active = false;
+					var regex=/^1(3|5|8)\d{9}$/;
+					if(regex.test(telephone)){
+						//校验通过,发送短信
+						$http({
+							method:'GET',
+							url:'customer_sendSms.action',
+							params:{
+								telephone:telephone
+							}
+						}).success(function(data,status,headers,config){
+							alert("发送短信成功，请注意手机！");
+						})
+						.error(function(data,status,headers,config){
+							alert("发送短信出错，请联系管理员");
+						});
+					}else{
+						//手机号非法
+						alert("手机号非法，请重新输入");
+						return;
+					}
+
+					timeInterval = setInterval(function() {
+						if(time < 0) {
+							$scope.btnMsg = "重发验证码";
+							$scope.$digest();
+							active = true;
+							time = 10;
+							clearInterval(timeInterval);
+							timeInterval = undefined;
+
+						} else {
+							$scope.btnMsg = time + "后重发验证码";
+							$scope.$digest();
+							time--;
+						}
+
+					}, 1000);
+
+				}
+
+			}]);
+		</script>
+
+	</head>
+
+	<body>
+
+		<div class="container">
+			<!--mainsignup-->
+			<section class="mainsign">
+
+				<!--定义模块-->
+				<div class="singup" ng-app="signupApp" ng-controller="signupCrtl">
+					<div class="col-md-9 signupbox">
+						<form class="form col-md-6">
+							<div class=" form-group">
+								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>手机号</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" ng-model="telephone" id="inputaccount" placeholder="请输入手机号">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>验证码</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="inputaccount" placeholder="请输入验证码">
+								</div>
+
+								<!--//添加点击事件，获取消息和触发函数-->
+								<div class="col-sm-3 song">
+									<a type="button"class="btn btn-default" ng-click="getCheckCode(telephone)" ng-bind="btnMsg">获取验证码</a>
+								</div>
+
+							</div>
+
+						</form>
+
+					</div>
+
+				</div>
+			</section>
+
+		</div>
+
+		<!--foot-->
+		<footer>
+			<section class="copyright size12">
+				<div class="container">
+					<p class="text-center">地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100 </p>
+					<p class="text-center">京ICP备08001421号京公网安备110108007702</p>
+				</div>
+			</section>
+		</footer>
+	</body>
+
+</html>
