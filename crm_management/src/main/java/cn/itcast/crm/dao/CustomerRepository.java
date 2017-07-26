@@ -23,4 +23,6 @@ public interface CustomerRepository  extends JpaRepository<Customer,Integer>{
 	@Modifying
 	public void clearFixedAreaId(String fixedAreaId);
 
+	public Customer findByTelephoneAndPassword(String telephone, String password);
+
 }

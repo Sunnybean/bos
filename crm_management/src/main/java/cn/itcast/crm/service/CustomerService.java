@@ -39,5 +39,12 @@ public interface CustomerService {
 	@Consumes({"application/xml","application/json"})
 	public void regist(Customer customer);
 	
+	@Path("/login")
+	@GET
+	@Consumes({"application/xml","application/json"})
+	
+	public Customer login(@QueryParam("telephone") String telephone
+			,@QueryParam("password") String password);
+	
 	
 }

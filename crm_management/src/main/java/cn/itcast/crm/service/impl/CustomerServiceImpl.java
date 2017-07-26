@@ -52,4 +52,10 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepository.save(customer);	
 	}
 
+	@Override
+	public Customer login(String telephone, String password) {
+		// TODO Auto-generated method stub
+		return customerRepository.findByTelephoneAndPassword(telephone,password);
+	}
+
 }
