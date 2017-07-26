@@ -2,6 +2,8 @@ package cn.itcast.bos.web.service.take_delivery.impl;
 
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,5 +44,17 @@ public class PromotionServiceImpl implements PromotionService {
 		pageBean.setPageData(pageData.getContent());
 		pageBean.setTotalCount(pageData.getTotalElements());
 		return pageBean;
+	}
+
+	@Override
+	public Promotion findById(Integer id) {
+		// TODO Auto-generated method stub
+		return promotionRepository.findOne(id);
+	}
+
+	@Override
+	public void updateStatus(Date date) {
+		// TODO Auto-generated method stub
+		promotionRepository.updataStatus(date);
 	}
 }
