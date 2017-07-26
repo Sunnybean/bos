@@ -15,7 +15,7 @@ bosfore_app.controller("ctrlRead", ['$scope', '$http', function($scope, $http) {
 			$scope.selectPage($scope.currentPage + 1);
 		}
 	}
-
+		
 	$scope.selectPage = function(page) {
 		// 如果页码超出范围
 		if($scope.totalPages != 0) {
@@ -26,11 +26,12 @@ bosfore_app.controller("ctrlRead", ['$scope', '$http', function($scope, $http) {
 			method: 'GET',
 			url: 'promotion_pageQuery.action',
 			params: {
-				"page": page,
-				"pageSize": $scope.pageSize
+				"page": page, // 当前页码 
+				"rows": $scope.pageSize // 每页记录数
 			}
 		}).success(function(data, status, headers, config) {
 			// 显示表格数据 
+			
 			$scope.pageItems = data.pageData;
 			// 计算总页数
 			$scope.totalCount = data.totalCount;
@@ -65,7 +66,7 @@ bosfore_app.controller("ctrlRead", ['$scope', '$http', function($scope, $http) {
 			
 		}).error(function(data, status, headers, config) {
 			// 当响应以错误状态返回时调用
-			alert("出错，请联系管理员 ");
+			alert("出错================请联系管理员 ");
 		});
 	}
 

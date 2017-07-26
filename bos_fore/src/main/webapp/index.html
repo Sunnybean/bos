@@ -5,7 +5,7 @@
 		<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>速运快递</title>
-
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" href="css/styleindex.css">
 		<link rel="stylesheet" type="text/css" href="css/public.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
@@ -168,7 +168,10 @@
 				}).when("/promotion", {
 					templateUrl: 'promotion.html'
 				}).when("/promotion_detail/:id", {
-					templateUrl: 'promotion_detail.html'
+					//在路由上拼接参数！！！详情，窗口使用
+					templateUrl: function($routeParams){
+						return "promotion_showDetail.action?id="+$routeParams.id;
+					}
 				}).otherwise({
 					redirectTo: '/'
 				})
