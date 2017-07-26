@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import cn.itcast.bos.domain.constant.Contants;
+
 /**
  * @description:促销信息实体类
  */
@@ -60,7 +62,16 @@ public class Promotion implements Serializable {
 	}
 
 	public String getTitleImg() {
-		return titleImg;
+		/*if (titleImg.startsWith("http://localhost:9003")) {
+			
+			String titleImg1 = titleImg.replaceAll("http://localhost:9003","http://localhost:8080");
+	syso
+			return titleImg1;
+		}*/
+		System.out.println(1111);
+		System.out.println(titleImg);
+		System.out.println(Contants.BOS_MANAGEMENT_URL+titleImg);
+		return Contants.BOS_MANAGEMENT_URL+titleImg;
 	}
 
 	public void setTitleImg(String titleImg) {
@@ -124,7 +135,11 @@ public class Promotion implements Serializable {
 	}
 
 	public String getDescription() {
-		return description;
+		if (description.contains(Contants.BOS_MANAGEMENT_URL+"/bos_management")) {
+			return description;
+		}
+		return description.replace("src=\"/bos_management",
+		"src=\""+Contants.BOS_MANAGEMENT_URL+"/bos_management");
 	}
 
 	public void setDescription(String description) {
