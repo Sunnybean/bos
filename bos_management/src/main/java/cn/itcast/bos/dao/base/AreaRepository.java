@@ -7,5 +7,5 @@ import cn.itcast.bos.domain.base.Area;
 
 //<>内为domain类和主键类型
 public interface AreaRepository extends JpaRepository<Area, String>, JpaSpecificationExecutor<Area> {
-
+	Area findByProvinceAndCityAndDistrict(String provice,String city,String district);
 }
