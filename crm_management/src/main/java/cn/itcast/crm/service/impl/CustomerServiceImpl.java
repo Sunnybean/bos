@@ -58,4 +58,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findByTelephoneAndPassword(telephone,password);
 	}
 
+	@Override
+	public String findFixedAreaIdByAddress(String address) {
+		// TODO Auto-generated method stub
+		return customerRepository.findFixedAreaIdByAddress(address);
+	}
+
 }

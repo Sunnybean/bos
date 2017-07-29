@@ -38,13 +38,20 @@ public interface CustomerService {
 	@POST //保存
 	@Consumes({"application/xml","application/json"})
 	public void regist(Customer customer);
-	
+	//登陆的方法
 	@Path("/login")
 	@GET
 	@Consumes({"application/xml","application/json"})
-	
 	public Customer login(@QueryParam("telephone") String telephone
 			,@QueryParam("password") String password);
+	
+	//根据地址，获取定区编码的方法
+	@Path("/customer/findFixedAreaIdByAddress")
+	@GET //查询
+	@Consumes({"application/xml","application/json"})
+	public String  findFixedAreaIdByAddress(@QueryParam("address") String address);
+	
+	
 	
 	
 }

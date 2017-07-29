@@ -20,9 +20,13 @@ public interface CustomerRepository  extends JpaRepository<Customer,Integer>{
 	public void updateFixedAreaId(String fixedAreaId, Integer id);
 
 	@Query("update Customer set fixedAreaId = null where fixedAreaId =?")
-	@Modifying
+	@Modifying //修改数据库的时候一定要加
 	public void clearFixedAreaId(String fixedAreaId);
 
 	public Customer findByTelephoneAndPassword(String telephone, String password);
+
+	//根据地址查询定区编号的方法
+	@Query("select fixedAreaId from Customer where address = ?")
+	public String findFixedAreaIdByAddress(String address);
 
 }
