@@ -21,7 +21,14 @@
 			}
 
 			function doEdit() {
-				alert("修改...");
+				var rows = $("#grid").datagrid('getSelections');
+					if(rows.length != 1) {
+						$.messager.alert("警告", "作废必须提供一条以上的数据", "hahah");
+					}else{
+						var row =rows[0];
+						$("#courierForm").form('load',row);
+						$("#addWindow").window('open');
+					}
 			}
 
 			function doDelete() {
@@ -208,9 +215,8 @@
 					});
 					return serializeObj;
 				};
-
+				//条件查询
 				$("#searchBtn").click(function() {
-
 					var params = $("#searchForm").serializeJson();
 					$("#searchForm").form('clear');
 					$("#grid").datagrid('load', params);
@@ -239,6 +245,7 @@
 				<form id="courierForm" action="../../courier_save.action" method="post">
 					<table class="table-edit" width="80%" align="center">
 						<tr class="title">
+							<input type="hidden" name="id" />
 							<td colspan="4">收派员信息</td>
 						</tr>
 						<tr>

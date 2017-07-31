@@ -18,4 +18,6 @@ public interface OrderService {
 	@POST //保存
 	@Consumes({"application/xml","application/json"})
 	public void order_save(Order order);
+
+	public Order findByOrderNumber(String orderNum);
 }

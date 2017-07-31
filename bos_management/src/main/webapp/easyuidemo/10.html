@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="../js/easyui/themes/icon.css" />
 		<script type="text/javascript">
 			$(function(){
+				//全局变量
+				var currentEditIndex;
 				// 页面加载后，对datagrid 进行设置
 				$("#grid").datagrid({
 					// 设置表格一些属性 
@@ -22,7 +24,14 @@
 						{
 							field: "name", // 用于和服务器返回json中字段对应 
 							title: "商品名称", // 列标题显示内容， <th> 
-							width: 100
+							width: 200,
+							editor:{
+								type:'validatebox',
+								options:{
+									required:true
+								}
+							}
+							
 						},
 						{
 							field: "price", // 用于和服务器返回json中字段对应 
@@ -32,15 +41,57 @@
 					]],
 					url : "product.json" , // 加载json数据，显示表格数据 
 					pagination : true , // 分页工具条
+					onAfterEdit:function(rowIndex,rowData,changes){
+						currentEditIndex=undefined;
+					},
+					onCancelEdit:function(rowIndex,rowData){
+						currentEditIndex=undefined;
+					},
+					
 					toolbar : [  // 一维数组，定义按钮 
 						{
-							id : "saveBtn",
+							id : "save",
 							text : "保存",
 							iconCls : "icon-save",
 							handler : function(){
-								alert("保存...");
+								$("#grid").datagrid('endEdit',currentEditIndex);
 							}
-						}
+						},{
+							id : "edit",
+							text : "编辑",
+							iconCls : "icon-edit",
+							handler : function(){
+								if(currentEditIndex != undefined){
+									//正在班级
+									return;
+								}
+								//获得选中行
+								var  row = $("#grid").datagrid('getSelected');
+								var  index = $("#grid").datagrid('getRowIndex',row);
+								$("#grid").datagrid('beginEdit',index);
+								currentEditIndex=index;
+							}
+						},{
+							id : "cancel",
+							text : "取消",
+							iconCls : "icon-cancel",
+							handler : function(){
+								$("#grid").datagrid('cancelEdit',currentEditIndex);
+								currentEditIndex = undefined;
+							}
+						},{
+							id : "add",
+							text : "添加",
+							iconCls : "icon-add",
+							handler : function(){
+								$("#grid").datagrid('insertRow',{
+									index:0,
+									row:{}
+								});
+								$("#grid").datagrid('beginEdit',0);
+								currentEidtIndex=0;
+							}
+						},
 					]
 				});
 			});

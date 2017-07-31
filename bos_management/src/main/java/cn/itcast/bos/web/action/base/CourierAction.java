@@ -123,8 +123,8 @@ public class CourierAction extends ActionSupport implements ModelDriven<Courier>
 		ActionContext.getContext().getValueStack().push(result);
 		return SUCCESS;
 	}
-	//作废快递员的fangf
-	@Action(value="courier_delBatch",results={@Result(name="success" ,location="./pages/base/courier.html")})
+	//作废快递员的方法
+	@Action(value="courier_delBatch",results={@Result(name="success" ,type="redirect",location="./pages/base/courier.html")})
 	public String delBatch(){
 		String[] idArray = ids.split(",");
 		courierService.delBatch(idArray);

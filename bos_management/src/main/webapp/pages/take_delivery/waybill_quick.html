@@ -45,6 +45,9 @@
 					editIndex = undefined;
 				}
 			}
+			function search(){
+				$("#grid").datagrid('endEdit',editIndex );
+			}
 			
 			//工具栏
 			var toolbar = [ {
@@ -62,11 +65,16 @@
 				text : '保存',
 				iconCls : 'icon-save',
 				handler : doSave
+			},{
+				id : 'button-search',
+				text : '条件查询',
+				iconCls : 'icon-search',
+				handler : search
 			}];
 			// 定义列
 			var columns = [ [ {
-				field : 'id',
-				title : '工作单号',
+				field : 'wayBillNum',
+				title : '运单号',
 				width : 120,
 				align : 'center',
 				editor :{
@@ -76,7 +84,7 @@
 					}
 				}
 			}, {
-				field : 'arrivecity',
+				field : 'arriveCity',
 				title : '到达地',
 				width : 120,
 				align : 'center',
@@ -87,7 +95,7 @@
 					}
 				}
 			},{
-				field : 'product',
+				field : 'goodsType',
 				title : '产品',
 				width : 120,
 				align : 'center',
@@ -146,11 +154,23 @@
 					pageList: [30,50,100],
 					pagination : true,
 					toolbar : toolbar,
-					url :  "",
+					url :  "../../waybill_pageQuery.action",
 					idField : 'id',
 					columns : columns,
 					onDblClickRow : doDblClickRow,
 					onAfterEdit : function(rowIndex, rowData, changes){
+						//新添加运单数据保存在数据表中
+						$.post("../../waybill_save.action",rowData,function(data){
+							if(data.success){
+								//保存成功
+								$.messager.show({
+									title:'提示窗口',
+									msg:data.msg
+								});
+								//刷新列表
+								$("#grid").datagrid('reload');
+							}
+						});
 						console.info(rowData);
 						editIndex = undefined;
 					}

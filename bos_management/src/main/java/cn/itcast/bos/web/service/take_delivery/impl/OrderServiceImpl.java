@@ -54,10 +54,10 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderTime(new Date());
 		order.setStatus("1");// 取单状态
 		// TODO Auto-generated method stub
-		System.out.println(order);
+		
 		// 自动分单逻辑，基于CRM地址库完全匹配，获取定区，匹配快递员
 		String fixedAreaId = WebClient.create(Contants.CRM_MANAGEMENT_URL
-				+ "/services/customerService/findFixedAreaIdByAddress?adderss=" + order.getSendAddress())
+				+"/crm_management/services/customerService/customer/findFixedAreaIdByAddress?address=" + order.getSendAddress())
 				.accept(MediaType.APPLICATION_JSON).get(String.class);
 		if (fixedAreaId != null) {
 			// 根据定区id获得定区，再获得快递员
@@ -138,7 +138,7 @@ public class OrderServiceImpl implements OrderService {
 		workBill.setCourier(order.getCourier());
 		workBillRepository.save(workBill);
 		// 发送短信
-
+/*
 		jmsTemplate.send("bos_sms", new MessageCreator() {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
@@ -148,9 +148,15 @@ public class OrderServiceImpl implements OrderService {
 						+ order.getSendName() + "手机号" + order.getSendMobile());
 				return mapMessage;
 			}
-		});
+		});*/
 		workBill.setPickstate("已通知");
 
+	}
+
+	@Override
+	public Order findByOrderNumber(String orderNum) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByOrderNum(orderNum);
 	}
 
 }

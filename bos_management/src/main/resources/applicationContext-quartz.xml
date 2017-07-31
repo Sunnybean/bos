@@ -8,7 +8,7 @@
  	
  	<context:component-scan base-package="cn.itcast.bos.quartz" />
  	
- 	<!-- job -->
+ 	<!-- job 定时任务调度-->
  	<bean id="promotionJob" 
  		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
  		<property name="jobClass" value="cn.itcast.bos.quartz.PromotionJob" />
@@ -21,7 +21,7 @@
  		<!-- 3秒后第一次执行 -->
  		<property name="startDelay" value="0" />
  		<!-- 5秒后重复执行 -->
- 		<property name="repeatInterval" value="666000" />
+ 		<property name="repeatInterval" value="6666000" />
  	</bean>
  	
  	<!-- scheduler  -->

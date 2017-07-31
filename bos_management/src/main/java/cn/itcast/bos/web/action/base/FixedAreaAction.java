@@ -36,9 +36,7 @@ import cn.itcast.crm.domain.Customer;
 @ParentPackage("json-default")
 @Namespace("/")
 public class FixedAreaAction extends BaseAction<FixedArea> {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 3434370911608802223L;
 
 	@Autowired

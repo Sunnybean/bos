@@ -49,7 +49,10 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
-	// 将分页查询结果数据，压入值栈的方法
+	/**
+	 * 将分页查询结果数据，压入值栈的方法
+	 * @param pageData
+	 */
 	protected void pushPageDataToValueStack(Page<T> pageData) {
 		Map<String, Object> result = new HashMap<>();
 		result.put("total", pageData.getTotalElements());
