@@ -23,7 +23,7 @@ public class WayBill implements Serializable {
 	@GeneratedValue
 	@Column(name = "C_ID")
 	private Integer id;
-	@Column(name = "C_WAY_BILL_NUM")
+	@Column(name = "C_WAY_BILL_NUM",unique=true)
 	private String wayBillNum; // 运单编号
 	@OneToOne
 	@JoinColumn(name = "C_ORDER_ID")
