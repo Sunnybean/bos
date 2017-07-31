@@ -24,12 +24,13 @@ public class CustomerAction extends BaseAction<Customer> {
 			@Result(name = "success", location = "index.html#/myhome", type = "redirect"),
 			@Result(name = "login", location = "login.html", type = "redirect") })
 	public String login() {
+	
 		Customer customer = WebClient
-				.create(Contants.CRM_MANAGEMENT_URL + "/services/customerService/customer/login?telephone="
-						+ model.getTelephone() + "&passoword=" + model.getPassword())
+				.create("http://localhost:8888/crm_management/services/customerService/login?telephone="
+						+ model.getTelephone() + "&password=" + model.getPassword())
 				//accept 接受查到的数据类型
-				.accept(MediaType.APPLICATION_JSON).get(Customer.class);
-
+				.accept(MediaType.APPLICATION_JSON)
+				/*.type(MediaType.APPLICATION_JSON)*/.get(Customer.class);
 		if (customer == null) {
 			return LOGIN;
 		} else {

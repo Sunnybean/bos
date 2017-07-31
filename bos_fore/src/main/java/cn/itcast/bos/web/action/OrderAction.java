@@ -8,6 +8,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -32,10 +33,13 @@ public class OrderAction extends BaseAction<Order> {
 	public void setRecAreaInfo(String recAreaInfo) {
 		this.recAreaInfo = recAreaInfo;
 	}
+	@Autowired
+	
 
 	@Action(value = "order_add", results = { @Result(name = "success", type = "redirect", location = "index.html") })
 	public String addOrder() {
 		// 封装发出地址信息
+		System.out.println("方法执行了");
 		Area sendArea = new Area();
 		String[] sendAreaData = sendAreaInfo.split("/");
 		sendArea.setProvince(sendAreaData[0]);
@@ -53,11 +57,17 @@ public class OrderAction extends BaseAction<Order> {
 		// 关联当前客户
 		Customer customer = (Customer) ServletActionContext.getRequest().getSession().getAttribute("customer");
 		model.setCustomer_id(customer.getId());
+		System.out.println(customer);
+		System.out.println(customer.getId());
+		System.out.println(model);
+		
 		// 调用WebService保存订单
-		WebClient.create(Contants.BOS_MANAGEMENT_URL + "/services/orderService/order").type(MediaType.APPLICATION_JSON)
+		WebClient.create(Contants.BOS_MANAGEMENT_URL + "/bos_management/services/orderService/order").type(MediaType.APPLICATION_JSON)
 				.post(model);
 
 		return SUCCESS;
 	}
+
+	
 
 }
