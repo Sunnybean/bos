@@ -42,6 +42,7 @@ public interface CustomerService {
 	@Path("/login")
 	@GET
 	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
 	public Customer login(@QueryParam("telephone") String telephone
 			,@QueryParam("password") String password);
 	
@@ -49,6 +50,7 @@ public interface CustomerService {
 	@Path("/customer/findFixedAreaIdByAddress")
 	@GET //查询
 	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
 	public String  findFixedAreaIdByAddress(@QueryParam("address") String address);
 	
 	
