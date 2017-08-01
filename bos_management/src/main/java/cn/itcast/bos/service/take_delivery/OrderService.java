@@ -1,4 +1,4 @@
-package cn.itcast.bos.web.service.take_delivery;
+package cn.itcast.bos.service.take_delivery;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

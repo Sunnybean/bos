@@ -1,4 +1,4 @@
-package cn.itcast.bos.web.service.take_delivery;
+package cn.itcast.bos.service.take_delivery;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +10,7 @@ public interface WayBillService {
 
 	void save(WayBill model);
 
-	Page<WayBill> findByPage(Pageable pageable);
+	Page<WayBill> findByPage(WayBill model, Pageable pageable);
 
 	WayBill findByWayBillNum(String wayBillNum);
 

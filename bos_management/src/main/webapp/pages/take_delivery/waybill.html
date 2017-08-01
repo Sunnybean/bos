@@ -24,7 +24,7 @@
 
 				// 对save按钮条件 点击事件
 				$('#save').click(function() {
-					// 对form 进行校验
+					// 对form 进行校验。没用同步提交，用的异步提交，json方式
 					$.post("../../waybill_save.action",$("#waybillForm").serialize(),function(data){
 						if(data.success){
 							$.messager.show({
@@ -39,6 +39,9 @@
 					});
 				});
 				
+				/*
+				$.post("../../order_findByOrderNum.action",{orderNum:$(this).val()},function(data){});
+				 * */
 				$("#orderNum").blur(function(){
 					$.post("../../order_findByOrderNumber.action",{orderNum:$(this).val()},function(data){
 						if(data.success){
@@ -47,7 +50,7 @@
 						$("input[name='order.id']").val(data.orderData);
 						$("input[name='order.orderNum']").val(data.orderData.orderNum);
 						$("input[name='order.courier.company']").val(data.orderData.courier.company);
-						$("input[name='order.courier.name']").val(data.orderData.courier.orderNum);
+						$("input[name='order.courier.name']").val(data.orderData.courier.name);
 						}else{
 							$("#waybillForm").get(0).reset();
 						}
@@ -58,6 +61,7 @@
 				$("#wayBillNum").blur(function(){
 					$.post("../../waybill_findByWayBillNum.action",{wayBillNum:$(this).val()},function(data){
 						if(data.success){
+							//表单的数据的重加载！！！！
 						$("#waybillForm").form('load',data.wayBillData);
 						}
 					});

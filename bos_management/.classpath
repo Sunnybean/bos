@@ -33,5 +33,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/Maven/repository/org/apache/struts/struts2-convention-plugin/2.3.24/struts2-convention-plugin-2.3.24.jar" sourcepath="E:/Maven/repository/org/apache/struts/struts2-convention-plugin/2.3.24/struts2-convention-plugin-2.3.24-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="javadoc_location" value="jar:file:/E:/Maven/repository/org/apache/struts/struts2-convention-plugin/2.3.24/struts2-convention-plugin-2.3.24-javadoc.jar!/"/>
+			<attribute name="maven.groupId" value="org.apache.struts"/>
+			<attribute name="maven.artifactId" value="struts2-convention-plugin"/>
+			<attribute name="maven.version" value="2.3.24"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

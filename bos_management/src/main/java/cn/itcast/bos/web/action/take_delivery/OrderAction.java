@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.itcast.bos.domain.take_delivery.Order;
+import cn.itcast.bos.service.take_delivery.OrderService;
 import cn.itcast.bos.web.action.common.BaseAction;
-import cn.itcast.bos.web.service.take_delivery.OrderService;
 
 @Scope("prototype")
 @Controller
@@ -32,8 +32,13 @@ public class OrderAction extends BaseAction<Order> {
 		if (order == null) {
 			result.put("success", false);
 		} else {
+			if (order.getWayBill()!= null) {
+				result.put("success", false);
+				result.put("msg", "已经生成订单信息！");
+			}else{
 			result.put("success", true);
 			result.put("orderData", order);
+			}
 		}
 		ActionContext.getContext().getValueStack().push(result);
 		return SUCCESS;

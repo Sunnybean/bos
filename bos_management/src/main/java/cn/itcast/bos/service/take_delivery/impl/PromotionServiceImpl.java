@@ -1,4 +1,4 @@
-package cn.itcast.bos.web.service.take_delivery.impl;
+package cn.itcast.bos.service.take_delivery.impl;
 
 
 
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.itcast.bos.dao.take_delivery.PromotionRepository;
 import cn.itcast.bos.domain.page.PageBean;
 import cn.itcast.bos.domain.take_delivery.Promotion;
-import cn.itcast.bos.web.service.take_delivery.PromotionService;
+import cn.itcast.bos.service.take_delivery.PromotionService;
 
 @Service
 @Transactional

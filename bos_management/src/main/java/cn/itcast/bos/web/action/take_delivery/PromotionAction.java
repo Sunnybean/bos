@@ -27,8 +27,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
 import cn.itcast.bos.domain.take_delivery.Promotion;
+import cn.itcast.bos.service.take_delivery.PromotionService;
 import cn.itcast.bos.web.action.common.BaseAction;
-import cn.itcast.bos.web.service.take_delivery.PromotionService;
 
 @Scope("prototype")
 @Controller

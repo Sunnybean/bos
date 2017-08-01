@@ -7,7 +7,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.itcast.bos.web.service.take_delivery.PromotionService;
+import cn.itcast.bos.service.take_delivery.PromotionService;
 
 public class PromotionJob implements Job {
 	

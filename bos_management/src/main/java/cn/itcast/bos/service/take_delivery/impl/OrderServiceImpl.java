@@ -1,4 +1,4 @@
-package cn.itcast.bos.web.service.take_delivery.impl;
+package cn.itcast.bos.service.take_delivery.impl;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -30,7 +30,7 @@ import cn.itcast.bos.domain.base.SubArea;
 import cn.itcast.bos.domain.constant.Contants;
 import cn.itcast.bos.domain.take_delivery.Order;
 import cn.itcast.bos.domain.take_delivery.WorkBill;
-import cn.itcast.bos.web.service.take_delivery.OrderService;
+import cn.itcast.bos.service.take_delivery.OrderService;
 
 @Service
 @Transactional
