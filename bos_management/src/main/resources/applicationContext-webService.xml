@@ -12,7 +12,7 @@
 	<jaxrs:server id="promotionService" address="/promotionService" >
 		<jaxrs:serviceBeans>
 		<!--实现类  -->
-			<bean class="cn.itcast.bos.web.service.take_delivery.impl.PromotionServiceImpl" />
+			<bean class="cn.itcast.bos.service.take_delivery.impl.PromotionServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:inInterceptors>
 			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
