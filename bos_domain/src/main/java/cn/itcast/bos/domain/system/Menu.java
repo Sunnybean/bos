@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * @description:菜单
  */
@@ -81,7 +83,7 @@ public class Menu {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	@JSON(serialize=false)
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -89,7 +91,7 @@ public class Menu {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
+	@JSON(serialize=false)
 	public Set<Menu> getChildrenMenus() {
 		return childrenMenus;
 	}
