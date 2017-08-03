@@ -18,7 +18,9 @@
 		<script src="../../js/toJson.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			function doSearch() {
+				//数据转换为json
 				var params = $("#searchForm").serializeJson();
+				//参数传递重加载表格完成查询
 				$('#tt').datagrid('load',params);
 			}
 		</script>
@@ -55,6 +57,7 @@
 					<option value="3">已签收</option>
 					<option value="4">异常</option>
 				</select>
+				<!--//当a标签不想用超链接，而是利用id来 触发函数的，可以写  href="javascirpt:void;" -->
 				<a href="javascript:void" class="easyui-linkbutton" 
 					plain="true" onclick="doSearch()">查询</a> 
 			</form>

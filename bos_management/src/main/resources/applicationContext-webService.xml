@@ -25,7 +25,7 @@
 	<jaxrs:server id="orderService" address="/orderService" >
 		<jaxrs:serviceBeans>
 		<!--实现类  -->
-			<bean class="cn.itcast.bos.web.service.take_delivery.impl.OrderServiceImpl" />
+			<bean class="cn.itcast.bos.service.take_delivery.impl.OrderServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:inInterceptors>
 			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />

@@ -33,10 +33,13 @@
 			<value>
 					/login.html* = anon
 					/user_login.action* = anon
+					/validatecode.jsp*= anon
 					/css/** = anon
 					/js/** = anon
 					/images/** = anon
 					/services/** = anon
+					/pages/base/courier.html* =  perms[courier:list]
+					/pages/base/area.html* =roles[base]
 					/** =authc
 			</value>
 		</property>
@@ -48,5 +51,14 @@
 	</bean>
 	<bean id="lifecycleBeanProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor">
 	</bean>
+	<!--  激活shiro注解-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+			depends-on="lifecycleBeanProcessor">
+			<property name="proxyTargetClass" value="true"></property>
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"/>
+	</bean>
+	
 
 </beans>

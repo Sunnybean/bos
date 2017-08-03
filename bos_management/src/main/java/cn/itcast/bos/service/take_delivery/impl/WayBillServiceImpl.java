@@ -71,8 +71,11 @@ public class WayBillServiceImpl implements WayBillService {
 			return wayBillIndexRepository.findAll(pageable);
 		}else{
 			//布尔查询，多条件查询
+			//must 条件必须成立and
+			//must not 条件必须不成立  not
+			//should 条件可以成立   or
 			BoolQueryBuilder query = new BoolQueryBuilder(); 
-			//运单号查询
+			//运单号查询 ----------等值匹配
 			if (StringUtils.isNoneBlank(wayBill.getWayBillNum())) {
 				QueryBuilder temQuery = new TermQueryBuilder("wayBillNum",wayBill.getWayBillNum());
 				query.must(temQuery);
