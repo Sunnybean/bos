@@ -18,4 +18,6 @@ public interface CourierService {
 
 	List<Courier> findNoAssociation();
 
+	Page<Courier> findPageData1(Pageable pageable);
+
 }

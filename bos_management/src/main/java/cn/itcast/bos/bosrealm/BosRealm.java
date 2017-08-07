@@ -24,7 +24,8 @@ import cn.itcast.bos.service.system.RoleService;
 import cn.itcast.bos.service.system.UserService;
 
 //实现安全连接
-@Service("bosRealm")
+//@Service("bosRealm")
+
 public class BosRealm extends AuthorizingRealm{
 	
 	@Autowired
@@ -62,19 +63,20 @@ public class BosRealm extends AuthorizingRealm{
 		// TODO Auto-generated method stub
 		System.out.println("shiro认证管理");
 		
-		//转寒token
+		//转换token
 		UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
 		User user = userService.findByUsername(usernamePasswordToken.getUsername());
 		if (user == null) {
 			//用户名不存在
-			//参数一：期望登陆后，保存在Subject中的信息
-			//参数二 ：如果返回null，说明用户名那个不残在，报用户名
-			//参数三：realm名称
+			
 			return null;
 		}else{
 			//用户名字存在
-			//当返回用户名密码的时候，securityManager安全管理器，自动比骄傲 返回密码和用户密码是否一致
+			//当返回用户名密码的时候，securityManager安全管理器，自动比较 返回密码和用户密码是否一致
 			//如果成功，登陆成功，如果不一致，就报异常
+			//参数一：期望登陆后，保存在Subject中的信息
+			//参数二 ：如果返回null，说明用户名那个不存在，报用户名
+			//参数三：realm名称
 			return new SimpleAuthenticationInfo(user,user.getPassword(),getName());
 		}
 		

@@ -13,6 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -116,8 +117,10 @@ public class CourierAction extends ActionSupport implements ModelDriven<Courier>
 		};
 
 		Pageable pageable = new PageRequest(page - 1, rows);
-		Page<Courier> pageData = courierService.findPageData(specfication,pageable);
-		Map<String, Object> result = new HashMap<>();
+		Page<Courier> pageData =null;
+		pageData = courierService.findPageData(specfication,pageable);
+		
+		Map<String,Object> result = new HashMap<>();
 		result.put("total", pageData.getTotalElements());
 		result.put("rows", pageData.getContent());
 		ActionContext.getContext().getValueStack().push(result);

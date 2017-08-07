@@ -13,27 +13,44 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.itcast.bos.domain.system.Menu;
+import cn.itcast.bos.domain.system.Role;
 import cn.itcast.bos.service.system.MenuService;
+import cn.itcast.bos.service.system.RoleService;
 import cn.itcast.bos.web.action.common.BaseAction;
 
 @Scope("prototype")
 @Controller
 @ParentPackage("json-default")
 @Namespace("/")
-public class RoleAction extends BaseAction<Menu> {
+public class RoleAction extends BaseAction<Role> {
+	private String[]  permissionIds ;
+	
+	
+	public void setPermissionIds(String[] permissionIds) {
+		this.permissionIds = permissionIds;
+	}
+
+
+	public void setMenuIds(String menuIds) {
+		this.menuIds = menuIds;
+	}
+
+
+	private String menuIds;
+	
 	@Autowired
-	private MenuService menuService;
-	@Action(value = "menu_list", results = { @Result(name = "success", type = "json")})
+	private RoleService roleService;
+	@Action(value = "role_list", results = { @Result(name = "success", type = "json")})
 	public String list(){
-		List<Menu> menus = menuService.findAll();
-		ActionContext.getContext().getValueStack().push(menus);
+		List<Role> roles = roleService.findAll();
+		ActionContext.getContext().getValueStack().push(roles);
 		return SUCCESS;
 	}
 	
 	
-	@Action(value = "menu_save", results = { @Result(name = "success", type = "redirect",location="pages/system/menu.html")})
+	@Action(value = "role_save", results = { @Result(name = "success", type = "redirect",location="pages/system/role.html")})
 	public String save(){
-		menuService.save(model);
+		roleService.save(model,permissionIds,menuIds);
 		return SUCCESS;
 	}
 }

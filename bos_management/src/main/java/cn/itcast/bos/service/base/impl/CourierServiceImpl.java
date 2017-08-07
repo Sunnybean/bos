@@ -64,5 +64,12 @@ public class CourierServiceImpl implements CourierService {
 		};
 		return courierRepository.findAll(specification);
 	}
+
+
+	@Override
+	public Page<Courier> findPageData1(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return courierRepository.findAll(pageable);
+	}
 	
 }

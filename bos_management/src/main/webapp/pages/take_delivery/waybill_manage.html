@@ -21,8 +21,52 @@
 				//数据转换为json
 				var params = $("#searchForm").serializeJson();
 				//参数传递重加载表格完成查询
-				$('#tt').datagrid('load',params);
+				$('#tt').datagrid('load', params);
 			}
+			$(function() {
+				$("#transitBtn").click(function() {
+					//获取选中数据表达的所有选中行
+					var rows = $("#tt").datagrid('getSelections');
+					if(rows == 0) {
+						$.messager.alert("警告", "必须选中运单信息", "waring");
+					}else{
+						//选中运单，获取选中运单的id
+						var array = new Array();
+						for(var i = 0; i < rows.length; i++) {
+							array.push(rows[i].id);
+						}
+						var wayBillIds = array.join(",");
+						$.post("../../transit_create.action", {
+							wayBillIds: wayBillIds
+						}, function(data) {
+							if(data.success) {
+								$.messager.show({
+									title: '操作成功',
+									msg: data.msg
+								});
+							} else {
+								$.messager.show({
+									title: '操作失败',
+									msg: data.msg
+								});
+							}
+						});
+					}
+				});
+				
+				//报表点击，导出Excel,
+				$("#exportXmlBtn").click(function(){
+					//下载效果
+					$("#searchForm").attr("action","../../reprort_exportXls.action");
+					$("#searchForm").submit();
+				});
+				//报表点击，导出PDF,
+				$("#exportPdfBtn").click(function(){
+					//下载效果
+					$("#searchForm").attr("action","../../reprort_exportPdf.action");
+					$("#searchForm").submit();
+				});
+			});
 		</script>
 	</head>
 
@@ -35,21 +79,23 @@
 			<a id="help" icon="icon-cancel" href="#" class="easyui-linkbutton" plain="true">取消</a>
 			<a id="help" icon="icon-save" href="#" class="easyui-linkbutton" plain="true">保存</a>
 			<a id="help" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">打印标签</a>
-			<a id="help" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">打印工作单</a>
-			
+			<a id="exportXlsBtn" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">导出报表</a>
+			<a id="exportPdfBtn" icon="icon-print" href="#" class="easyui-linkbutton" plain="true">导出PDF</a>
+			<a id="transitBtn" icon="icon-edit" href="#" class="easyui-linkbutton" plain="true">开始中转配送</a>
+
 			<br />
 			<form id="searchForm">
-				运单号：<input name="wayBillNum" style="line-height:26px;border:1px solid #ccc"/>
-				发货地：<input name="sendAddress" style="line-height:26px;border:1px solid #ccc" />
-				收货地：<input name="recAddress" style="line-height:26px;border:1px solid #ccc" />
-				
+				运单号：<input name="wayBillNum" style="line-height:26px;border:1px solid #ccc" /> 发货地：
+				<input name="sendAddress" style="line-height:26px;border:1px solid #ccc" /> 收货地：
+				<input name="recAddress" style="line-height:26px;border:1px solid #ccc" />
+
 				<select class="easyui-combobox" style="width:150px" name="sendProNum">
 					<option value="">请选择快递产品类型</option>
 					<option value="速运当日">速运当日</option>
 					<option value="速运次日">速运次日</option>
 					<option value="速运隔日">速运隔日</option>
 				</select>
-				
+
 				<select class="easyui-combobox" style="width:150px" name="signStatus">
 					<option value="0">请选择运单状态</option>
 					<option value="1">待发货</option>
@@ -58,13 +104,10 @@
 					<option value="4">异常</option>
 				</select>
 				<!--//当a标签不想用超链接，而是利用id来 触发函数的，可以写  href="javascirpt:void;" -->
-				<a href="javascript:void" class="easyui-linkbutton" 
-					plain="true" onclick="doSearch()">查询</a> 
+				<a href="javascript:void" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</a>
 			</form>
 		</div>
-		<table id="tt" class="easyui-datagrid" 
-			url='../../waybill_pageQuery.action'
-			fit="true" toolbar="#tb" rownumbers="true" pagination="true">	
+		<table id="tt" class="easyui-datagrid" url='../../waybill_pageQuery.action' fit="true" toolbar="#tb" rownumbers="true" pagination="true">
 			<thead>
 				<tr>
 					<th field="ck" checkbox="true"></th>
