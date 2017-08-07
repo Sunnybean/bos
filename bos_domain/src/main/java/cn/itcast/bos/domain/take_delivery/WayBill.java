@@ -15,6 +15,8 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cn.itcast.bos.domain.base.Area;
 
 /**
@@ -150,7 +152,7 @@ public class WayBill implements Serializable {
 	public void setWayBillNum(String wayBillNum) {
 		this.wayBillNum = wayBillNum;
 	}
-
+	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}
@@ -182,7 +184,7 @@ public class WayBill implements Serializable {
 	public void setSendCompany(String sendCompany) {
 		this.sendCompany = sendCompany;
 	}
-
+	@JsonIgnore
 	public Area getSendArea() {
 		return sendArea;
 	}
@@ -222,7 +224,7 @@ public class WayBill implements Serializable {
 	public void setRecCompany(String recCompany) {
 		this.recCompany = recCompany;
 	}
-
+	@JsonIgnore
 	public Area getRecArea() {
 		return recArea;
 	}

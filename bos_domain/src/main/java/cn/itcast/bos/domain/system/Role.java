@@ -1,5 +1,6 @@
 package cn.itcast.bos.domain.system;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,12 +13,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * @description:角色
  */
 @Entity
 @Table(name = "T_ROLE")
-public class Role {
+public class Role implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name = "C_ID")
@@ -75,7 +78,7 @@ public class Role {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	@JSON(serialize=false)
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -83,7 +86,7 @@ public class Role {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-
+	@JSON(serialize=false)
 	public Set<Permission> getPermissions() {
 		return permissions;
 	}
@@ -91,7 +94,7 @@ public class Role {
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}
-
+	@JSON(serialize=false)
 	public Set<Menu> getMenus() {
 		return menus;
 	}

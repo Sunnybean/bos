@@ -1,5 +1,6 @@
 package cn.itcast.bos.domain.system;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.struts2.json.annotations.JSON;
 
@@ -20,7 +22,7 @@ import org.apache.struts2.json.annotations.JSON;
  */
 @Entity
 @Table(name = "T_MENU")
-public class Menu {
+public class Menu implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "C_ID")
@@ -46,6 +48,14 @@ public class Menu {
 
 	public int getId() {
 		return id;
+	}
+	@Transient
+	public Integer getpId(){
+		if (parentMenu == null) {
+			return 0;
+		}else{
+			return parentMenu.getId();
+		}
 	}
 
 	public void setId(int id) {
